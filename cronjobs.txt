@@ -1,0 +1,10 @@
+#Starts server on boot
+@reboot /bin/sh /home/wvu/scripts/./start.sh
+#Updates server at 3 AM
+25 3 * * * /bin/sh /home/wvu/scripts/./update.sh
+#Auto Uploads demo files 
+0 * * * * /bin/sh /home/wvu/scripts/./demoAutoUpload.sh
+#Cleans Demos from csgo folder at 5 AM on Sundays
+0 5 * * SUN /bin/sh /home/wvu/scripts/./cleanDemos.sh
+#Runs WebScraper script that compares original and if update then updates servers.
+0 * * * * /bin/sh /home/wvu/scripts/./webScrape.sh
