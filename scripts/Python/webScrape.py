@@ -1,32 +1,59 @@
 import os
+import os.path
 import urllib.request
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
-updates = "http://blog.counter-strike.net/index.php/category/updates/"
-page = urllib.request.urlopen(updates)
-soup = BeautifulSoup(page, from_encoding="utf-8", features="lxml")
+'''
+main()
+originalCheck
+Checks if there is an original header.txt
+If not run headerOrig
+If there is go to updateCheck
 
-header = open('header.txt', 'w')
+updateCheck
+Checks against origHeader.txt
+if change run update script
+if no change end script 
+'''
 
-print (soup.find_all("h2"),file = header)
-header.close()
+def originalCheck():
+    if os.path.isfile('headerOrig.txt'):
+        updateCheck()
+    else:
+        originalHeader()
+        
+def originalHeader():
+    updatesOriginal = "http://blog.counter-strike.net/index.php/category/updates/"
+    pageOriginal = urllib.request.urlopen(updatesOriginal)
+    soupOriginal = BeautifulSoup(pageOriginal, from_encoding="utf-8", features="lxml")
+    headerOriginal = open('headerOrig.txt', 'w')
+    print (soupOriginal.find_all("h2"),file = headerOriginal)
+    headerOriginal.close()
 
-new=open("header.txt","r")
-origin=open("headerOrig.txt","r")
+def updateCheck():
+    updates = "http://blog.counter-strike.net/index.php/category/updates/"
+    page = urllib.request.urlopen(updates)
+    soup = BeautifulSoup(page, from_encoding="utf-8", features="lxml")
+    header = open('header.txt', 'w')
 
-origUpdate = '/home/wvu/scripts/./webScrapeOrig.sh'
-update = '/home/wvu/scripts/./update.sh'
+    print (soup.find_all("h2"),file = header)
+    header.close()
 
-for line1 in new:
-    for line2 in origin:
-        if line1==line2:
-            print ("No Changes")
-        else:
-            os.system(origUpdate)
-            os.system(update)
-            print ("updating")
-        break
-new.close()
-origin.close()
-quit()
+    new=open("header.txt","r")
+    origin=open("headerOrig.txt","r")
+    update = '/home/wvu/scripts/./update.sh'
+
+    for line2 in new:
+        for line1 in origin:
+            if line2==line1:
+                print ("No Changes")
+            else:
+                originalHeader()
+                os.system(update)
+                print ("updating")
+    new.close()
+    origin.close()
+    quit()
+
+originalCheck()
