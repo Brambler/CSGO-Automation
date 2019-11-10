@@ -4,19 +4,6 @@ import urllib.request
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
-'''
-main()
-originalCheck
-Checks if there is an original header.txt
-If not run headerOrig
-If there is go to updateCheck
-
-updateCheck
-Checks against origHeader.txt
-if change run update script
-if no change end script 
-'''
-
 def originalCheck():
     if os.path.isfile('headerOrig.txt'):
         updateCheck()
