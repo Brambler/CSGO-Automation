@@ -16,20 +16,14 @@ Checks against origHeader.txt
 if change run update script
 if no change end script 
 '''
-
-def main():
-    originalCheck()
-    if original == "exists":
-        updateCheck()
-    else:
-        originalHeader()
+originalCheck()
+updateCheck()
 
 def originalCheck():
     if os.path.isfile('headerOriginal.txt'):
-        original = "exists"
+        updateCheck()
     else:
-        original = "notexists"
-    return original
+        originalHeader()
 
 def originalHeader():
     updatesOriginal = "http://blog.counter-strike.net/index.php/category/updates/"
@@ -66,6 +60,4 @@ def updateCheck():
             break
     new.close()
     origin.close()
-
-main()
 
