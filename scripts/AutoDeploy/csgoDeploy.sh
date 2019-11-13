@@ -18,7 +18,7 @@ tar xfvz steamcmd_linux.tar.gz
 ./steamcmd.sh +login anonymous +force_install_dir ../$installDir +app_update 740 validate +quit
 cd ../
 #hostname
-cd CSGO-AUTOMATION/scripts/AutoDeploy/
+cd CSGO-Automation/scripts/AutoDeploy/
 clear
 read -p "Enter the hostname (Name of your server): " hostnameVar
 echo "hostname" "\"$hostnameVar\"" >> server.cfg
@@ -40,14 +40,15 @@ done
 clear
 read -p "Enter your desired rcon password: " rconVar
 echo "rcon_password" "\"$rconVar\"" >> server.cfg
-mv CSGO-AUTOMATION/scripts/AutoDeploy/server.cfg $installDir/csgo/cfg/
+cp -r CSGO-Automation/scripts/AutoDeploy/server.cfg $installDir/csgo/cfg/
 #Prac/Scrim Files
-mv CSGO-AUTOMATION/scripts/AutoDeploy/csgo/addons $installDir/csgo/
-mv CSGO-AUTOMATION/scripts/AutoDeploy/csgo/cfg/get5 $installDir/csgo/cfg/
-mv CSGO-AUTOMATION/scripts/AutoDeploy/csgo/cfg/sourcemod $installDir/csgo/cfg/
+cd
+cp -r CSGO-Automation/scripts/AutoDeploy/csgo/addons $installDir/csgo/
+cp -r CSGO-Automation/scripts/AutoDeploy/csgo/cfg/get5 $installDir/csgo/cfg/
+cp -r CSGO-Automation/scripts/AutoDeploy/csgo/cfg/sourcemod $installDir/csgo/cfg/
 clear
 cd
-rm -r CSGO-AUTOMATION/scripts/AutoDeploy
+rm -r CSGO-Automation/scripts/AutoDeploy
 #Create Start and Update scripts
 # Start
 echo "#!/bin/bash" >> startServer.sh
