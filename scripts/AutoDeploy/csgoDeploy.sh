@@ -44,15 +44,10 @@ echo "rcon_password" "\"$rconVar\"" >> server.cfg
 mv CSGO-AUTOMATION/scripts/AutoDeploy/server.cfg $installDir/csgo/cfg/
 
 #Prac/Scrim Files
-while true; do
-    read -p "Do you wish to import Bramble's Prac/Scrim Files (Y or N)" yn
-    case $yn in
-        [Yy]* ) mv csgo/addons/ ../../../$installDir/csgo/; mv csgo/cfg/get5/ ../../../$installDir/csgo/cfg/; mv csgo/cfg/sourcemod/ ../../../$installDir/csgo/cfg/; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+mv csgo/addons/ ../../../$installDir/csgo/; mv csgo/cfg/get5/ ../../../$installDir/csgo/cfg/; mv csgo/cfg/sourcemod/ ../../../$installDir/csgo/cfg/
 clear
+cd
+rm -r CSGO-AUTOMATION/scripts/AutoDeploy/
 echo "Server Install Complete"
 sleep 2
 clear
