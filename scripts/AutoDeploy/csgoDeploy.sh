@@ -17,7 +17,6 @@ wget http://media.steampowered.com/client/steamcmd_linux.tar.gz
 tar xfvz steamcmd_linux.tar.gz
 ./steamcmd.sh +login anonymous +force_install_dir ../$installDir +app_update 740 validate +quit
 cd ../
-
 #hostname
 cd CSGO-AUTOMATION/scripts/AutoDeploy/
 clear
@@ -42,12 +41,24 @@ clear
 read -p "Enter your desired rcon password: " rconVar
 echo "rcon_password" "\"$rconVar\"" >> server.cfg
 mv CSGO-AUTOMATION/scripts/AutoDeploy/server.cfg $installDir/csgo/cfg/
-
 #Prac/Scrim Files
 mv csgo/addons/ ../../../$installDir/csgo/; mv csgo/cfg/get5/ ../../../$installDir/csgo/cfg/; mv csgo/cfg/sourcemod/ ../../../$installDir/csgo/cfg/
 clear
 cd
 rm -r CSGO-AUTOMATION/scripts/AutoDeploy/
+#Create Start and Update scripts
+echo "#!/bin/bash" >> startServer.sh
+echo "cd $installDir/" >> startServer.sh
+echo "screen -A -m -d -S $installDir ./srcds_run -game csgo -console -usercon +game_type 0 +game_mode 1 +mapgroup mg_active -tickrate 128 +map de_cache -maxplayers_override 12 +sv_setsteamaccount $steamidVar  -port 27015" >> startServer.sh
+chmod +x startServer.sh
+cd
+echo "#!/bin/bash" >> updateServer.sh
+echo "killall screen" >> updateServer.sh
+echo "cd steam/" >> updateServer.sh
+echo "./steamcmd.sh +login anonymous +force_install_dir ./$installDir/ +app_update 740 validate +quit" >> updateServer.sh
+chmod +x updateServer.sh
+#Runs start script
+./startServer.sh
 echo "Server Install Complete"
 sleep 2
 clear
