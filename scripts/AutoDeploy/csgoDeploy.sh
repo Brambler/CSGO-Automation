@@ -42,16 +42,19 @@ read -p "Enter your desired rcon password: " rconVar
 echo "rcon_password" "\"$rconVar\"" >> server.cfg
 mv CSGO-AUTOMATION/scripts/AutoDeploy/server.cfg $installDir/csgo/cfg/
 #Prac/Scrim Files
-mv csgo/addons/ ../../../$installDir/csgo/; mv csgo/cfg/get5/ ../../../$installDir/csgo/cfg/; mv csgo/cfg/sourcemod/ ../../../$installDir/csgo/cfg/
+mv CSGO-AUTOMATION/scripts/AutoDeploy/csgo/addons $installDir/csgo/
+mv CSGO-AUTOMATION/scripts/AutoDeploy/csgo/cfg/get5 $installDir/csgo/cfg/
+mv CSGO-AUTOMATION/scripts/AutoDeploy/csgo/cfg/sourcemod $installDir/csgo/cfg/
 clear
 cd
-rm -r CSGO-AUTOMATION/scripts/AutoDeploy/
+rm -r CSGO-AUTOMATION/scripts/AutoDeploy
 #Create Start and Update scripts
+# Start
 echo "#!/bin/bash" >> startServer.sh
 echo "cd $installDir/" >> startServer.sh
 echo "screen -A -m -d -S $installDir ./srcds_run -game csgo -console -usercon +game_type 0 +game_mode 1 +mapgroup mg_active -tickrate 128 +map de_cache -maxplayers_override 12 +sv_setsteamaccount $steamidVar  -port 27015" >> startServer.sh
 chmod +x startServer.sh
-cd
+# Update
 echo "#!/bin/bash" >> updateServer.sh
 echo "killall screen" >> updateServer.sh
 echo "cd steam/" >> updateServer.sh
