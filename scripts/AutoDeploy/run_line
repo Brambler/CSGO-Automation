@@ -1,0 +1,1 @@
+git clone https://github.com/Brambler/CSGO-Automation && sudo chmod +x CSGO-Automation/scripts/AutoDeploy/csgoDeploy.sh && sudo ./CSGO-Automation/scripts/AutoDeploy/csgoDeploy.sh

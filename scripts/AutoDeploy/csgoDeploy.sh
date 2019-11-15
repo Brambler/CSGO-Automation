@@ -40,9 +40,9 @@ done
 clear
 read -p "Enter your desired rcon password: " rconVar
 echo "rcon_password" "\"$rconVar\"" >> server.cfg
+cd
 cp -r CSGO-Automation/scripts/AutoDeploy/server.cfg $installDir/csgo/cfg/
 #Prac/Scrim Files
-cd
 cp -r CSGO-Automation/scripts/AutoDeploy/csgo/addons $installDir/csgo/
 cp -r CSGO-Automation/scripts/AutoDeploy/csgo/cfg/get5 $installDir/csgo/cfg/
 cp -r CSGO-Automation/scripts/AutoDeploy/csgo/cfg/sourcemod $installDir/csgo/cfg/
