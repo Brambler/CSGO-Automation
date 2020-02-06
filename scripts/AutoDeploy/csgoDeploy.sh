@@ -21,17 +21,17 @@ cd ../
 cd CSGO-Automation/scripts/AutoDeploy/
 clear
 read -p "Enter the hostname (Name of your server): " hostnameVar
-echo "hostname" "\"$hostnameVar\"" >> server.cfg
+echo "hostname" "\"$hostnameVar\"" >> CSGO-AUTOMATION/scripts/AutoDeploy/server.cfg
 #ServerToken
 clear
 read -p "Enter your SteamGameServer TOKEN: " steamidVar
-echo "sv_setsteamaccount" "\"$steamidVar\"" >> server.cfg
+echo "sv_setsteamaccount" "\"$steamidVar\"" >> CSGO-AUTOMATION/scripts/AutoDeploy/server.cfg
 #Password (Yes or No)
 clear
 while true; do
-    read -p "Do you wish to Password Protect your server? (Y or N)" yn
+    read -p "Do you wish to Password Protect your server? (Y or N): " yn
     case $yn in
-        [Yy]* ) read -p "Enter your desired password: " passwordVar; echo "sv_password" "\"$passwordVar\"" >> server.cfg; break;;
+        [Yy]* ) read -p "Enter your desired password: " passwordVar; echo "sv_password" "\"$passwordVar\"" >> CSGO-AUTOMATION/scripts/AutoDeploy/server.cfg; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -39,6 +39,7 @@ done
 #Rcon Password
 clear
 read -p "Enter your desired rcon password: " rconVar
+<<<<<<< Updated upstream
 echo "rcon_password" "\"$rconVar\"" >> server.cfg
 cd
 cp -r CSGO-Automation/scripts/AutoDeploy/server.cfg $installDir/csgo/cfg/
@@ -49,6 +50,18 @@ cp -r CSGO-Automation/scripts/AutoDeploy/csgo/cfg/sourcemod $installDir/csgo/cfg
 clear
 cd
 rm -r CSGO-Automation/scripts/AutoDeploy
+=======
+echo "rcon_password" "\"$rconVar\"" >> CSGO-AUTOMATION/scripts/AutoDeploy/server.cfg
+cd
+mv CSGO-AUTOMATION/scripts/AutoDeploy/server.cfg $installDir/csgo/cfg/
+#Prac/Scrim Files
+cd
+cd CSGO-AUTOMATION/scripts/AutoDeploy/
+mv csgo/addons/ $installDir/csgo/; mv csgo/cfg/get5/ $installDir/csgo/cfg/; mv csgo/cfg/sourcemod/ $installDir/csgo/cfg/
+clear
+cd
+rm -r CSGO-AUTOMATION/scripts/AutoDeploy
+>>>>>>> Stashed changes
 #Create Start and Update scripts
 # Start
 echo "#!/bin/bash" >> startServer.sh
